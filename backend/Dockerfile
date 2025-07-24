@@ -16,5 +16,5 @@ COPY . .
 # Esponi la porta 4000
 EXPOSE 4000
 
-# Avvia il server
+# Avvia il server con npm start
 CMD ["npm", "start"]
