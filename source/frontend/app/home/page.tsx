@@ -159,7 +159,7 @@ export default function HomePage() {
                       {Event.title}
                     </p>
                     <p className={`text-sm ${Event.image ? 'text-white/80' : 'text-gray-600'}`}>
-                      {Event.event_date} – {Event.location}
+                      {new Date(Event.event_date).toLocaleDateString()} – {Event.location}
                     </p>
                   </div>
                 </Link>
