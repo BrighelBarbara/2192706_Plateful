@@ -1,0 +1,44 @@
+[
+  {
+    "set_id": 1,
+    "set_name": "Authentication and User Management",
+    "user_stories": [8, 9, 10, 12, 16],
+    "links": [2, 4, 6],
+    "db": true
+  },
+  {
+    "set_id": 2,
+    "set_name": "Event Management",
+    "user_stories": [1, 2, 3, 4, 5, 6, 7, 11, 13, 19, 20],
+    "links": [1, 3, 4],
+    "db": true
+  },
+  {
+    "set_id": 3,
+    "set_name": "Menu Planning",
+    "user_stories": [14, 21, 23, 25],
+    "links": [2, 4, 6],
+    "db": true
+  },
+  {
+    "set_id": 4,
+    "set_name": "Voting System",
+    "user_stories": [15, 22, 26],
+    "links": [2, 3, 6],
+    "db": true
+  },
+  {
+    "set_id": 5,
+    "set_name": "Shopping List",
+    "user_stories": [17, 18, 24, 27],
+    "links": [3, 4],
+    "db": true
+  },
+  {
+    "set_id": 6,
+    "set_name": "Notifications and Allergy Handler",
+    "user_stories": [16, 23, 28, 29],
+    "links": [1, 3, 4],
+    "db": false
+  }
+]
