@@ -106,7 +106,9 @@ useEffect(() => {
       <div className="flex items-center gap-2 mb-2">
         <Calendar className="w-4 h-4 text-gray-600" />
         <p className="text-sm text-gray-700">
-          Date: <span className="font-medium">{event.event_date}</span>
+          Date:<span className="font-medium">
+  {new Date(event.event_date).toLocaleDateString('it-IT')}
+</span>
         </p>
       </div>
 
