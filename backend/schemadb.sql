@@ -73,7 +73,8 @@ CREATE TABLE dish_proposals (
     preparation_time INTEGER, -- in minuti
     difficulty_level INTEGER CHECK (difficulty_level BETWEEN 1 AND 5),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_url VARCHAR(255)
 );
 
 -- Tabella voti sui piatti

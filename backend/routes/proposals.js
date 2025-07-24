@@ -1,21 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); // oppure configura come preferisci
 
 
 // 🟣 Crea una nuova proposta di piatto
-router.post('/', async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   const {
     event_id,
     user_id,
     category_name,
     title,
     description,
-    ingredients,
-    image_url
+    ingredients
   } = req.body;
+  const image_url = req.file ? `/uploads/${req.file.filename}` : null;
   
-  // 🔍 Risolviamo l'ID della categoria dal nome
+  // Risolto l'ID della categoria dal nome
   if (
     !event_id ||
     !user_id ||
@@ -72,7 +74,7 @@ router.get('/:eventId/categories/:categoryName/proposals', async (req, res) => {
 
     const categoryId = categoryResult.rows[0].id;
 
-    // 🔽 Recupera le proposte
+   // 🔽 Recupera le proposte con voti e chi ha votato
     const result = await db.query(
       `
       SELECT 
@@ -87,6 +89,7 @@ router.get('/:eventId/categories/:categoryName/proposals', async (req, res) => {
         dp.created_at,
         u.first_name || ' ' || u.last_name AS author_name,
         COUNT(DISTINCT dv.id) AS votes,
+        ARRAY_REMOVE(ARRAY_AGG(DISTINCT dv.user_id), NULL) AS voted_by,
         COUNT(DISTINCT dar.id) > 0 AS has_allergen
       FROM dish_proposals dp
       LEFT JOIN users u ON dp.user_id = u.id
@@ -100,13 +103,16 @@ router.get('/:eventId/categories/:categoryName/proposals', async (req, res) => {
     );
 
     res.json(
-  result.rows.map(row => ({
-    ...row,
-    ingredients: typeof row.ingredients === 'string'
-      ? row.ingredients.split(',').map(i => i.trim())
-      : []
-  }))
-);
+      result.rows.map(row => ({
+        ...row,
+        ingredients: typeof row.ingredients === 'string'
+          ? row.ingredients.split(',').map(i => i.trim())
+          : [],
+        image_url: row.image_url?.startsWith('http')
+          ? row.image_url
+          : `http://localhost:4000${row.image_url}`
+      }))
+    );
   } catch (err) {
     console.error('❌ Errore nel recupero delle proposte:', err);
     res.status(500).json({ message: 'Errore del server' });
@@ -133,9 +139,11 @@ router.get('/:proposalId', async (req, res) => {
       return res.status(404).json({ message: 'Proposal not found' });
     }
 
-    const proposal = proposalResult.rows[0];
+        const proposal = proposalResult.rows[0];
     const ingredients = proposal.ingredients?.split(',').map(i => i.trim()) || [];
-
+        if (proposal.image_url && !proposal.image_url.startsWith('http')) {
+  proposal.image_url = `http://localhost:4000${proposal.image_url}`;
+}
     // 🔹 Partecipanti con allergie
     const participantsResult = await db.query(`
       SELECT u.id, u.first_name, u.last_name, a.name AS allergy
