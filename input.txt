@@ -1,0 +1,28 @@
+# SYSTEM DESCRIPTION:
+
+Plateful is a platform that allows a group of users to collaboratively organize a menu for social events such as dinners, picnics, or parties. The goal is to create a menu that meets the preferences of every participant, allowing users to upload their recipe ideas along with the respective ingredients and vote for their favorite options in each category (appetizers, main courses, desserts, etc.). With Plateful, users can join or create events, submit dish proposals, vote for the options they prefer and report allergies.
+
+# USER STORIES:
+
+1) As an event creator, I want to create an event.  
+2) As an event creator, I want to add users to the event.  
+3) As an event creator, I want to define the categories  
+4) As an event creator, I want to set the number of dishes allowed per category.  
+5) As an event creator, I want to set the event date.  
+6) As an event creator, I want to set the location  
+7) As an event creator, I want to set the voting deadline.  
+8) As a user, I want to register for an account.   
+9) As a user, I want to log in to my account.  
+10) As a user, I want to log out from my account.  
+11) As a user, I want to have a list of events I am participating in. (HOMEPAGE)  
+12) As a user, I want to see my personal profile with my information  
+13) As a user, I want to participate to an event  
+14) As a user, I want to submit a dish proposal with a title, description, ingredients, and an optional photo.  
+15) As a user, I want to vote for my favorite dishes in each category.  
+16) As a user, I want to report my allergies  
+17) As a user, I want to add additional items to the shopping list.
+18) As a user, I want to remove items from the shopping list if they are unnecessary.  
+19) As a user, I want to mark an item as purchased on the shopping list.
+20) As a user, I want to see the participants in the event  
+21) As a user, I want to cancel my participation in the event  
+22) As a user, I want to see the most voted dishes for each category 
